@@ -1,83 +1,71 @@
-import RPi.GPIO as GPIO          
+import RPi.GPIO as GPIO
 from time import sleep
 
+GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-GPIO.setmode(GPIO.BOARD)
+class Motor():
+    def __init__(self,Ena,In1,In2):
+        self.Ena = Ena
+        self.In1 = In1
+        self.In2 = In2
+        GPIO.setup(self.Ena, GPIO.OUT)
+        GPIO.setup(self.In1, GPIO.OUT)
+        GPIO.setup(self.In2, GPIO.OUT)
+        
+        self.pwm = GPIO.PWM(self.Ena, 100)
+        self.pwm.start(0)
+    
+    def Forward(self, time=0.2):
+        GPIO.output(self.In1, GPIO.LOW)
+        GPIO.output(self.In2, GPIO.HIGH)
+        self.pwm.ChangeDutyCycle(30)
+        sleep(time)
+        
+    def Stop(self, time=0.2):
+        self.pwm.ChangeDutyCycle(0)
+        sleep(time)
+        
+        
+def Left(motor1, motor2, motor3, motor4):
+    print('Left')
+    motor1.Stop()
+    motor2.Stop()
+    motor3.Forward()
+    motor4.Forward()
 
-motor1a = 7
-motor1b = 11
-motor1c = 22
+def Right(motor1, motor2, motor3, motor4):
+    print('Right')
+    motor1.Forward()
+    motor2.Forward()
+    motor3.Stop()
+    motor4.Stop()
+    
+def Forward(motor1, motor2, motor3, motor4):
+    print('Forward')
+    motor1.Forward()
+    motor2.Forward()
+    motor3.Forward()
+    motor4.Forward()
 
-motor2a = 13
-motor2b = 16
-motor2c = 15
-
-GPIO.setup(motor1a, GPIO.OUT)
-GPIO.setup(motor1b, GPIO.OUT)
-GPIO.setup(motor1c, GPIO.OUT)
-GPIO.setup(motor2a, GPIO.OUT)
-GPIO.setup(motor2b, GPIO.OUT)
-GPIO.setup(motor2c, GPIO.OUT)
-
-pwm1a = GPIO.PWM(motor1a, 100)
-pwm1b = GPIO.PWM(motor1b, 100)
-pwm1c = GPIO.PWM(motor1c, 100)
-pwm2a = GPIO.PWM(motor2a, 100)
-pwm2b = GPIO.PWM(motor2b, 100)
-pwm2c = GPIO.PWM(motor2c, 100)
-
-pwm1a.start(0)
-pwm1b.start(0)
-pwm1c.start(0)
-pwm2a.start(0)
-pwm2b.start(0)
-pwm2c.start(0)
-
-def forward():
-    GPIO.output(motor1a, GPIO.HIGH)
-    GPIO.output(motor1b, GPIO.LOW)
-    GPIO.output(motor1c, GPIO.HIGH)
-    GPIO.output(motor2a, GPIO.HIGH)
-    GPIO.output(motor2b, GPIO.LOW)
-    GPIO.output(motor2c, GPIO.HIGH)
-
-def reverse():
-    GPIO.output(motor1a, GPIO.LOW)
-    GPIO.output(motor1b, GPIO.HIGH)
-    GPIO.output(motor1c, GPIO.HIGH)
-    GPIO.output(motor2a, GPIO.LOW)
-    GPIO.output(motor2b, GPIO.HIGH)
-    GPIO.output(motor2c, GPIO.HIGH)
-
-def right():
-    GPIO.output(motor1a, GPIO.LOW)
-    GPIO.output(motor1b, GPIO.HIGH)
-    GPIO.output(motor1c, GPIO.HIGH)
-    GPIO.output(motor2a, GPIO.HIGH)
-    GPIO.output(motor2b, GPIO.LOW)
-    GPIO.output(motor2c, GPIO.HIGH)
-
-def left():
-    GPIO.output(motor1a, GPIO.HIGH)
-    GPIO.output(motor1b, GPIO.LOW)
-    GPIO.output(motor1c, GPIO.HIGH)
-    GPIO.output(motor2a, GPIO.LOW)
-    GPIO.output(motor2b, GPIO.HIGH)
-    GPIO.output(motor2c, GPIO.HIGH)
-
-def stop():
-    GPIO.output(motor1a, GPIO.LOW)
-    GPIO.output(motor1b, GPIO.LOW)
-    GPIO.output(motor1c, GPIO.LOW)
-    GPIO.output(motor2a, GPIO.LOW)
-    GPIO.output(motor2b, GPIO.LOW)
-    GPIO.output(motor2c, GPIO.LOW)
+def Stop(motor1, motor2, motor3, motor4):
+    print('Stop')
+    motor1.Stop()
+    motor2.Stop()
+    motor3.Stop()
+    motor4.Stop()
+    
+motor1 = Motor(2,3,4)
+motor2 = Motor(17,27,22)
+motor3 = Motor(10,9,11)
+motor4 = Motor(5,6,13)
 
 
+Left(motor1, motor2, motor3, motor4)
+Stop(motor1, motor2, motor3, motor4)
+Right(motor1, motor2, motor3, motor4)
+Stop(motor1, motor2, motor3, motor4)
+Forward(motor1, motor2, motor3, motor4)
+Stop(motor1, motor2, motor3, motor4)
 
-while(1):
-
-pwm.stop()
-GPIO.cleanup()
-
+print("Finished")
