@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+body{
+    background-color: #fafafa;
+}
+
+.container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #7f8c8f;
+    box-shadow: 0 2px 8px rgba(0,0,0,.16);
+    /*width: 700px;
+    height: 680px;*/
+    width: 90vw;
+    height: 90vh;
+    text-align: center;
+    font-family: 'Nunito',sans-serif;
+    border-radius: 40px 40px
+   
+}
+
+h1{
+    margin: 12px 0;
+    color: white;
+}
+
+/* App page */
+.element-list{
+    /*height: 450px;*/
+    height: 45%;
+    overflow-y: scroll
+}
+
+ul{
+    padding: 15px;
+   
+}
+
+li{
+    list-style: none;
+    padding: 10px 5px;
+    background-color: #fff;
+    margin: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,.16);
+    border-radius: 3px;
+    transition: .4s;
+}
+
+button:hover{
+    background-color: #1565c0;
+}
+
+li:hover{
+    background-color: #e0e0e0;
+}
+
+.checked{
+    text-decoration: line-through;
+    background-color: #e0e0e0;
+}
+
+.delete{
+    padding: 7px 14px;
+    background-color: #df0b0b;
+    border: none;
+    border-radius: 4px;
+    color: #fafafa;
+    margin-left: 220px;
+}
+
+.delete:hover {
+    background-color: rgb(102, 4, 4);
+}
+
+/* Style the header with a grey background and some padding */
+.header {
+    overflow: hidden;
+    background-color: #bfebe5;
+    padding: 20px 10px;
+    border-radius: 40px 40px 0px 0px;
+  }
+  
+  /* Style the header links */
+  .header a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+  }
+  
+  /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+  .header a.logo {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .header a.logo:hover {
+    background-color: #bfebe5;
+  }
+  
+  /* Change the background color on mouse-over */
+  .header a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Float the link section to the right */
+  .header-right {
+    float: right;
+  }
+  
+  /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+  @media screen and (max-width: 500px) {
+    .header a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .header-right {
+      float: none;
+    }
+  }
+
+ .checkout {
+    /*height: 80px;
+    margin-bottom: 100px;*/
+    height: 30vh;
+    margin-bottom: 10vh;
+ }
+
+ .checkoutBtn {
+    /*margin-top: 50px;*/
+    /*margin-top: 10vh;*/
+    padding: 7px 14px;
+    background-color: #106d2f;
+    border: none;
+    border-radius: 4px;
+    color: #fafafa;
+    /*margin-left: 400px;*/
+    margin-left: 40vw;
+}
+    
+ .checkoutBtn:hover {
+    background-color: rgb(10, 39, 2);
+}
+
+ .subtotal {
+   /*margin-bottom: 25px;
+    margin-right: 400px;*/
+    margin-bottom: 2vh;
+    margin-right: 30vw;
+}
+
+ .total {
+    /*margin-bottom: 25px;
+    margin-right: 400px;*/
+    margin-bottom: 2vh;
+    margin-right: 30vw;
+}
+
+/* About Page */
+.paragraph {
+  /*margin-top: 250px;
+  margin-left: 150px;
+  width: 400px;*/
+  margin-top: 30vh;
+  margin-left: 25vw;
+  width: 50vh;
+}
+
+/* SignUp page */
+.signup {
+  /*width: 400px;
+  height: 300px;
+  margin: 100px auto;*/
+  width: 80vw;
+  height: 50vh;
+  margin: 10vw auto;
+  overflow: scroll;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.signupbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.signupbtn:hover {
+  opacity:1;
+  background-color: #0f3515;
+}
+
+.signupbtn:focus {
+  outline: none;
+}
+
+/* Float signup buttons and add an equal width */
+.signupbtn {
+  float: center;
+  width: 50%;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .signupbtn {
+    width: 100%;
+  }
+}
+
+/* Login page*/
+.login {
+  width: 80vw;
+  height: 50vh;
+  margin: 10vw auto;
+  overflow: scroll;
+}

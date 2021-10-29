@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartShopper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="header">
+            <a href="#default" class="logo">SmartShopper</a>
+            <div class="header-right">
+              <a href="login.html">Login</a>
+              <a href="index.html">Home</a>
+            </div>
+        </div>
+
+        <div class="login">
+            <form id="login" onsubmit="return false">
+                <h1>Login</h1>
+                <hr>
+            
+                <label for="username"><b>Username</b></label>
+                <input type="text" id="username" placeholder="Enter Username" name="username" required>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" id="password" placeholder="Enter Password" name="password" required>
+            
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Log in</button>
+                </div>
+
+                <a href="signup.html">Click here to sign up</a>
+            </form>
+        </div>
+
+    </div>
+</body>
+<script src="login.js"></script>
+</html>
