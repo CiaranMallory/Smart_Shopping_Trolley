@@ -77,18 +77,35 @@ app.get('/getpassword/:username/:password', (req, res) => {
     });
 });
 
+// End Point for raspberry pi to send data to
 app.post('/', function(req, res){
     var type = req.body.Type;
     var price = req.body.Price;
-    console.log("python: " + type);
-    console.log("python: " + price);
+    //console.log("python: " + type);
+    //console.log("python: " + price);
     global.globalType = type;
     global.globalPrice = price;
 });
 
+// End point for client to call to get item data
 app.get('/Data', function(req, res) {
-    // make some calls to database, fetch some data, information, check state, etc...
     var dataToSendToClient = {'Type': globalType, 'Price': globalPrice};
+    // convert whatever we want to send (preferably should be an object) to JSON
+    var JSONdata = JSON.stringify(dataToSendToClient);
+    res.send(JSONdata);
+});
+
+// End point for client to send enable status to
+app.post('/Enable', function(req, res){
+    var Enable = req.body.Enable;
+    //console.log("python: " + type);
+    console.log(Enable);
+    global.globalEnable = Enable;
+});
+
+// End point to send enable status to raspberry pi
+app.get('/EnableStatus', function(req, res) {
+    var dataToSendToClient = {'Enable': globalEnable};
     // convert whatever we want to send (preferably should be an object) to JSON
     var JSONdata = JSON.stringify(dataToSendToClient);
     res.send(JSONdata);

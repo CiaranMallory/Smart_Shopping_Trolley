@@ -14,11 +14,10 @@ height = 4
 video.set(width,640)
 video.set(height,480)
 
-url = "http://localhost:3000"
+url = "http://192.168.1.8:3000"
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
 def SendData(Type, Price):
-    #message = {'msg': 'Milk, $4.00'}
     message = {'Type': Type, 'Price': Price}
     response = requests.post(url, data=json.dumps(message), headers=headers)
 
@@ -33,6 +32,7 @@ def SendData(Type, Price):
     #    pts = np.array([barcode.polygon], np.int32)
     #    pts = pts.reshape((-1,1,2))
     #    cv2.polylines(img, [pts], True, (255,0,255), 5)
+
 SendData('Butter', 4.5)
 SendData('Milk', 6)
 

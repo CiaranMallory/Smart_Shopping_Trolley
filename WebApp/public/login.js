@@ -34,7 +34,7 @@ window.onload = function() {
                             var userLoggedIn = 'true';
                             sessionStorage.setItem("userStatus", userLoggedIn);
                             sessionStorage.setItem("username", username);
-                            location.href = 'app.html';
+                            location.href = 'start.html';
                         } else {
                             alert('Incorrect Password');
                         }

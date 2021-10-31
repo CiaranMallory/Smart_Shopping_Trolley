@@ -256,9 +256,16 @@ hr {
   }
 }
 
-/* Login page*/
+/* Login Page */
 .login {
   width: 50vw;
   height: 50vh;
   margin: 10vw auto;
+}
+
+/* Start Page */
+.start {
+  margin-top: 30vh;
+  float: left;
+  margin-left: 40vw;
 }

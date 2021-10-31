@@ -5,6 +5,8 @@ import math
 import numpy as np
 from centroidtracker import CentroidTracker
 import tracemalloc
+import json
+import requests
 
 #tracemalloc.start()
 
@@ -54,6 +56,14 @@ def Movement(center, objectId):
         #    print('Forward')
         #if(center[1] < 720):
         #    print('Stop')
+
+Enable = 0
+def GetEnableStatus():
+    url = "http://192.168.1.8:3000/EnableStatus"
+    response = requests.get(url)
+    data = response.json()
+    Enable = data['Enable']
+    print(Enable)
 
 # Open Source Function used to remove noise from detections
 def non_max_suppression_fast(boxes, overlapThresh):
