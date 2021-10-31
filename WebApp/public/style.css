@@ -19,8 +19,8 @@ body{
     box-shadow: 0 2px 8px rgba(0,0,0,.16);
     /*width: 700px;
     height: 680px;*/
-    width: 90vw;
-    height: 90vh;
+    width: 95vw;
+    height: 95vh;
     text-align: center;
     font-family: 'Nunito',sans-serif;
     border-radius: 40px 40px
@@ -35,8 +35,8 @@ h1{
 /* App page */
 .element-list{
     /*height: 450px;*/
-    height: 45%;
-    overflow-y: scroll
+    height: 50vh;
+    overflow-y: scroll;
 }
 
 ul{
@@ -149,25 +149,29 @@ li:hover{
     border-radius: 4px;
     color: #fafafa;
     /*margin-left: 400px;*/
-    margin-left: 40vw;
-}
+    margin-top: 5vh;
+    margin-right: 20vw;
+    float: right;
+  }
     
  .checkoutBtn:hover {
     background-color: rgb(10, 39, 2);
-}
+  }
 
  .subtotal {
    /*margin-bottom: 25px;
     margin-right: 400px;*/
-    margin-bottom: 2vh;
-    margin-right: 30vw;
+    margin-top: 5vh;
+    margin-left: 30vw;
+    float: left;
 }
 
  .total {
     /*margin-bottom: 25px;
     margin-right: 400px;*/
-    margin-bottom: 2vh;
-    margin-right: 30vw;
+    margin-top: 5vh;
+    margin-left: 1vw;
+    float: left;
 }
 
 /* About Page */
@@ -175,8 +179,10 @@ li:hover{
   /*margin-top: 250px;
   margin-left: 150px;
   width: 400px;*/
-  margin-top: 30vh;
-  margin-left: 25vw;
+  margin: auto;
+  margin-top: 40vh;
+  /*margin-top: 30vh;
+  margin-left: 25vw;*/
   width: 50vh;
 }
 
@@ -185,10 +191,9 @@ li:hover{
   /*width: 400px;
   height: 300px;
   margin: 100px auto;*/
-  width: 80vw;
+  width: 50vw;
   height: 50vh;
   margin: 10vw auto;
-  overflow: scroll;
 }
 
 /* Full-width input fields */
@@ -253,8 +258,7 @@ hr {
 
 /* Login page*/
 .login {
-  width: 80vw;
+  width: 50vw;
   height: 50vh;
   margin: 10vw auto;
-  overflow: scroll;
 }

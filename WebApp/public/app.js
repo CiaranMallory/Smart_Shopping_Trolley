@@ -83,32 +83,34 @@ function onError() {
   console.log('No data to receive');
 }
 
-var total;
+var totalPrice;
 
 // Function which adds up and displays total price
 function total() {
     if(prices.length !== 0) {
-        total = prices.reduce((a, b) => a + b, 0)
-        console.log(total);
+        totalPrice = prices.reduce((a, b) => a + b, 0)
+        console.log(totalPrice);
     } else {
-        total = 0;
+        totalPrice = 0;
     }
         //for(i=0; i<prices.length; i++) {
         //    var total = 0;
         //    total = total + prices[i];
         //    console.log(total);
         //}
-    totalPrice.innerHTML = "$" + total;
+    totalPrice.innerHTML = "$" + totalPrice;
 }
 
 function Logout() {
     sessionStorage.setItem("userStatus", "false");
-    console.log(userLoggedIn);
+    //console.log(userLoggedIn);
     location.href = "login.html";
 }
 
 function checkout() {
-    alert("Purchase Successful: $ " + total);
-    total = 0;
-
+    alert("Purchase Successful: " + totalPrice.value);
+    // Clearing elements
+    totalPrice = 0;
+    prices.length = 0;
+    types.length = 0;
 }
