@@ -149,7 +149,7 @@ li:hover{
     color: #fafafa;
     /*margin-left: 400px;*/
     margin-top: 5vh;
-    margin-right: 20vw;
+    margin-right: 10vw;
     float: right;
   }
     
@@ -171,6 +171,24 @@ li:hover{
     margin-top: 5vh;
     margin-left: 1vw;
     float: left;
+}
+
+.stopBtn {
+  /*margin-top: 50px;*/
+  /*margin-top: 10vh;*/
+  padding: 7px 14px;
+  background-color: #eb0c0c;
+  border: none;
+  border-radius: 4px;
+  color: #fafafa;
+  /*margin-left: 400px;*/
+  margin-top: 5vh;
+  margin-right: 2vw;
+  float: right;
+}
+  
+.stopBtn:hover {
+  background-color: rgb(99, 3, 3);
 }
 
 /* About Page */

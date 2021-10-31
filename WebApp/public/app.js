@@ -141,3 +141,18 @@ function startShopping() {
     var data = JSON.stringify({"Enable": "true"});
     req.send(data);
 }
+
+function stopShopping() {
+    location.href = "start.html";
+    //console.log(enable);
+    var req = new XMLHttpRequest();
+    var url = '/Enable';
+
+    req.open('POST',url,true);
+    req.setRequestHeader("Content-Type", "application/json");
+    req.addEventListener('load',onLoad);
+    req.addEventListener('error',onError);
+
+    var data = JSON.stringify({"Enable": "false"});
+    req.send(data);
+}
