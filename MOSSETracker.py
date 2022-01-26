@@ -10,6 +10,8 @@ import RPi.GPIO as GPIO
 from time import sleep
 from pyzbar.pyzbar import decode
 
+serverIP = ''
+
 # GPIO settings
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -124,69 +126,74 @@ def Movement(center):
 
 Enable = 1
 def GetEnableStatus():
-    url = "http://192.168.1.8:3000/EnableStatus"
+    url = "http://${serverIP}:3000/EnableStatus"
     response = requests.get(url)
     data = response.json()
     Enable = data['Enable']
     print(Enable)
 
 def SendItemData(Type, Price):
-    url = "http://192.168.1.8:3000"
+    url = "http://${serverIP}:3000"
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     message = {'Type': Type, 'Price': Price}
     response = requests.post(url, data=json.dumps(message), headers=headers)
 
+# Count variable to prevent Movement function being called to frequent
+count = 0;
 
-# Configure frame
-ret, frame = video.read()
+while True:
+    if(Enable):
+        # Configure frame
+        ret, frame = video.read()
 
-# Call model to detect user
-ClassIndex, confidence, bbox = model.detect(frame, confThreshold=0.5)
+        # Call model to detect user
+        ClassIndex, confidence, bbox = model.detect(frame, confThreshold=0.5)
 
-# List to store coordinates of bounding boxes
-rects = []
-# Check something has been detected in the frame
-if (len(ClassIndex)!=0):
-    # Removing double brackets and adding boxes
-    for ClassInd, conf, boxes in zip(ClassIndex.flatten(), confidence.flatten(), bbox):
-        # Check if person is detected
-        if (ClassInd == 1):
-            # Start tracking the person
-            tracker.init(frame,boxes)
-            
-            while True:
-
-                success, frame = video.read()
-                success, bbox = tracker.update(frame)
-                #print(bbox)
-
-                if success:
-                    drawBox(frame,bbox)
-                    center = (math.floor((bbox[0]+bbox[2])/2), math.floor((bbox[1]+bbox[3])/2))
-                    #print(center)
-                    cv2.circle(frame, center, 3, (0,0,255), 2)
-                    Movement(center)
+        # Check something has been detected in the frame
+        if (len(ClassIndex)!=0):
+            # Removing double brackets and adding boxes
+            for ClassInd, conf, boxes in zip(ClassIndex.flatten(), confidence.flatten(), bbox):
+                # Check if person is detected
+                if (ClassInd == 1):
+                    # Start tracking the person
+                    tracker.init(frame,boxes)
                     
-                #Detect and Read barcode
-                for barcode in decode(frame):
-                    # Convert barcode to string
-                    Data = barcode.data.decode('utf-8')
-                    #print(Data)
-                    data = Data.split("-", 1)
-                    #print(data[0])
-                    #print(data[1])
-                    #SendItemData(data[0], data[1])
-                    # Draw box around barcodes
-                    pts = np.array([barcode.polygon], np.int32)
-                    pts = pts.reshape((-1,1,2))
-                    cv2.polylines(frame, [pts], True, (255,0,255), 5)
+                    while True:
 
-                # Display video
-                cv2.imshow('Object Detection',frame)
-                
-                # Cancel video playback if 'q' key is pressed
-                if cv2.waitKey(2) & 0xFF == ord('q'):
-                    break
+                        success, frame = video.read()
+                        success, bbox = tracker.update(frame)
+                        #print(bbox)
+
+                        if success:
+                            drawBox(frame,bbox)
+                            center = (math.floor((bbox[0]+bbox[2])/2), math.floor((bbox[1]+bbox[3])/2))
+                            #print(center)
+                            cv2.circle(frame, center, 3, (0,0,255), 2)
+                            if (count == 10):
+                                Movement(center)
+                                count = 0
+                            count+=1
+                            
+                        # Detect and Read barcode
+                        for barcode in decode(frame):
+                            # Convert barcode to string
+                            Data = barcode.data.decode('utf-8')
+                            #print(Data)
+                            data = Data.split("-", 1)
+                            #print(data[0])
+                            #print(data[1])
+                            #SendItemData(data[0], data[1])
+                            # Draw box around barcodes
+                            pts = np.array([barcode.polygon], np.int32)
+                            pts = pts.reshape((-1,1,2))
+                            cv2.polylines(frame, [pts], True, (255,0,255), 5)
+
+                        # Display video
+                        cv2.imshow('Object Detection',frame)
+                        
+                        # Cancel video playback if 'q' key is pressed
+                        if cv2.waitKey(2) & 0xFF == ord('q'):
+                            break
 
 
 #current, peak = tracemalloc.get_traced_memory()
